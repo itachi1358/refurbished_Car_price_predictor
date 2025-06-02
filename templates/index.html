@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Price</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 90%;
+            max-width: 800px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #prediction {
+            margin-top: 20px;
+            color: #007bff;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img src='/static/Pasted_image.png' alt="Prediction Banner">
+    <form action="#" method="post">
+        <h1>Buying Price (in lakhs)</h1>
+        <input type="number" name="cp" id="cp" placeholder="Ex: 6.5">
+
+        <h1>Age</h1>
+        <input type="number" name="age" id="age" placeholder="Ex: 4">
+
+        <h1>Distance Travelled (in km)</h1>
+        <input type="number" name="dist" id="dist" placeholder="Ex: 50000">
+
+        <h1>Fuel Type</h1>
+        <h3>Type 1 for Petrol</h3>
+        <h3>Type 2 for Diesel</h3> 
+        <input type="number" name="fuel" id="fuel" placeholder="1 or 2">
+
+        <button type="button" onclick="send_data()">Predict</button>
+        <h2 id="prediction">Predict Price: </h2>
+    </form>
+
+    <script>
+    function send_data() {
+        console.log("Pressed");
+        var form = document.querySelector('form');
+        var fd = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        var prediction = document.getElementById("prediction");
+
+        xhr.open('POST', '/predict', true);
+        prediction.innerHTML = "Wait...";
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                prediction.innerHTML = "Prediction is: " + xhr.responseText;
+            }
+        };
+
+        xhr.send(fd);
+    } 
+    </script>
+</body>
+</html>
