@@ -1,7 +1,7 @@
-Flask==2.3.2
-gunicorn==20.1.0
-numpy==1.24.4
-pandas==1.5.3
-scikit-learn==1.2.2
-seaborn==0.12.2
-streamlit==1.35.0
+Flask
+gunicorn
+numpy
+pandas
+scikit-learn
+seaborn
+streamlit
