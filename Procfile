@@ -1,1 +1,1 @@
-web: gunicorn application:app
+web: streamlit run application.py --server.port 8000 --server.address 0.0.0.0
